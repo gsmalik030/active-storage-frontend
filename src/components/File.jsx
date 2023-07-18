@@ -11,7 +11,16 @@ const File = () => {
         data.append("post[image]", e.target.image.files[0])
         sendToServer(data)
     }
-    const sendToServer = (data) => {}
+    const sendToServer = (data) => {
+        fetch('http://localhost:3000/posts', {
+            method: 'POST',
+            body: data
+        })
+        .then(res => res.json())
+        .then(data => {
+            setLatestPost(data.image_url)
+        }).catch(err => console.log(err))
+    }
   return (
     <div>
       <form onSubmit={(e)=>hanleSubmit(e)}>
@@ -21,7 +30,7 @@ const File = () => {
         <label htmlFor="image">Image</label>
         <input type="file" name="image" id="image"   />
         <br />
-        <button type='submit'>Upload</button>
+        <button type='submit'>Create</button>
         
       </form>
     </div>
