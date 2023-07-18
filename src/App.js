@@ -1,24 +1,18 @@
-import logo from './logo.svg';
+import { createContext, useState } from 'react';
 import './App.css';
+import File from './components/File';
+import LatestImage from './components/LatestImage';
+export const AppContext = createContext(null);
 
 function App() {
+  const [latestPost, setLatestPost] = useState(AppContext);
   return (
+    <AppContext.Provider value={{ latestPost, setLatestPost }}>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <File/>
+      <LatestImage/>
     </div>
+    </AppContext.Provider>
   );
 }
 
